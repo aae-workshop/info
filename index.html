@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advances in Adaptive Experimentation — Workshop 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ivory:    #f8f4ee;      /* warm parchment background */
+      --ivory2:   #f2ece2;      /* slightly deeper for alt sections */
+      --surface:  #fffdf9;      /* near-white cards */
+      --border:   #e2d9cc;      /* warm grey border */
+      --border2:  #ccc0ae;      /* slightly stronger border */
+      --ink:      #1c1a16;      /* near-black, warm not cold */
+      --ink2:     #3e3a30;      /* body text */
+      --muted:    #8a8070;      /* captions, labels */
+      --navy:     #1a2e44;      /* deep navy — headline accent */
+      --gold:     #a07830;      /* warm gold — links, dots */
+      --gold-lt:  #f0e4c8;      /* gold tint for tags/highlights */
+      --green:    #2d5a3d;      /* forest green — CTA */
+      --green-lt: #e4ede8;      /* green tint */
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--ivory); color: var(--ink); font-family: var(--sans); font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(248,244,238,0.93);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 56px;
+    }
+    .nav-logo {
+      font-family: var(--serif); font-size: 1.05rem; font-weight: 500;
+      color: var(--navy); text-decoration: none; letter-spacing: 0.01em;
+    }
+    .nav-links { display: flex; gap: 0; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--ink2); text-decoration: none;
+      padding: 0.35rem 0.85rem; border-radius: 4px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-links a:hover { background: var(--gold-lt); color: var(--navy); }
+    .nav-cta {
+      font-size: 0.8rem; font-weight: 600;
+      background: var(--green); color: #fff;
+      padding: 0.38rem 1rem; border-radius: 4px;
+      text-decoration: none; transition: opacity 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    #hero { background: var(--surface); border-bottom: 1px solid var(--border); }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 5.5rem 2rem 5rem;
+      display: grid; grid-template-columns: 1fr 360px; gap: 4rem; align-items: center;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.4rem;
+    }
+    .hero-tag span { width: 22px; height: 1px; background: var(--gold); display: inline-block; }
+    h1 {
+      font-family: var(--serif); font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+      font-weight: 500; line-height: 1.12; letter-spacing: -0.01em;
+      color: var(--navy); margin-bottom: 1.3rem;
+    }
+    h1 em { font-style: italic; color: var(--gold); }
+    .hero-desc {
+      font-size: 1.02rem; line-height: 1.78; color: var(--ink2);
+      max-width: 520px; margin-bottom: 2rem;
+    }
+    .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn {
+      font-size: 0.83rem; font-weight: 600;
+      padding: 0.6rem 1.4rem; border-radius: 4px;
+      text-decoration: none; transition: all 0.15s; border: 1.5px solid transparent;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      letter-spacing: 0.01em;
+    }
+    .btn-green   { background: var(--green); color: #fff; border-color: var(--green); }
+    .btn-green:hover { background: #224a31; border-color: #224a31; }
+    .btn-outline { background: transparent; color: var(--ink); border-color: var(--border2); }
+    .btn-outline:hover { border-color: var(--navy); color: var(--navy); }
+
+    /* hero bandit card */
+    .hero-aside {
+      background: var(--ivory2);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.6rem 1.8rem;
+    }
+    .aside-label {
+      font-size: 0.67rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem;
+    }
+    .bandit-bars { display: flex; align-items: flex-end; gap: 10px; height: 96px; margin-bottom: 0.8rem; }
+    .b-col { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+    .b-bar-wrap { width: 100%; display: flex; flex-direction: column; justify-content: flex-end; flex: 1; }
+    .b-bar {
+      width: 100%; border-radius: 3px 3px 0 0;
+      animation: bar-rise 1.2s cubic-bezier(.22,1,.36,1) both;
+      transform-origin: bottom;
+    }
+    .b-col:nth-child(1) .b-bar { height: 52%; background: #c9b99a; animation-delay:.1s }
+    .b-col:nth-child(2) .b-bar { height: 79%; background: #b0a080; animation-delay:.2s }
+    .b-col:nth-child(3) .b-bar { height: 36%; background: #c9b99a; animation-delay:.3s }
+    .b-col:nth-child(4) .b-bar { height: 64%; background: #b0a080; animation-delay:.4s }
+    .b-col:nth-child(5) .b-bar { height: 92%; background: var(--gold); animation-delay:.5s }
+    @keyframes bar-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+    .b-ci { width: 100%; height: 1px; background: var(--border2); position: relative; margin-top: 2px; }
+    .b-ci::before, .b-ci::after { content: ''; position: absolute; width: 1px; height: 5px; background: var(--border2); top: -2px; }
+    .b-ci::before { left: 0; } .b-ci::after { right: 0; }
+    .b-name { font-size: 0.61rem; color: var(--muted); font-weight: 500; }
+    .b-val  { font-size: 0.67rem; font-weight: 600; color: var(--ink2); }
+    .b-col:nth-child(5) .b-val { color: var(--gold); }
+    .bandit-caption {
+      font-size: 0.71rem; color: var(--muted); line-height: 1.55;
+      border-top: 1px solid var(--border); padding-top: 0.8rem; margin-top: 0.4rem;
+    }
+    .bandit-caption strong { color: var(--ink2); }
+
+    /* ── SHARED SECTION ── */
+    .section { border-bottom: 1px solid var(--border); }
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+    .section-header { margin-bottom: 2.5rem; }
+    .section-number {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem;
+    }
+    h2 {
+      font-family: var(--serif); font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 500; line-height: 1.18; color: var(--navy);
+    }
+    .section-intro { font-size: 1rem; line-height: 1.8; color: var(--ink2); max-width: 680px; margin-top: 0.9rem; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: start; margin-top: 2.5rem; }
+    .about-text p { font-size: 1rem; line-height: 1.85; color: var(--ink2); }
+    .about-text p + p { margin-top: 1rem; }
+    .topics-list { display: flex; flex-direction: column; }
+    .topic-row { display: flex; align-items: flex-start; gap: 0.9rem; padding: 0.82rem 0; border-bottom: 1px solid var(--border); }
+    .topic-row:first-child { border-top: 1px solid var(--border); }
+    .topic-num { font-size: 0.66rem; font-weight: 600; color: var(--gold); min-width: 20px; padding-top: 2px; font-family: var(--serif); font-style: italic; }
+    .topic-row h3 { font-size: 0.87rem; font-weight: 600; color: var(--navy); margin-bottom: 0.12rem; }
+    .topic-row p  { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── SPEAKERS ── */
+    .speakers-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+      gap: 1px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+    }
+    .speaker-card { background: var(--surface); padding: 1.6rem 1.4rem; transition: background 0.15s; }
+    .speaker-card:hover { background: var(--gold-lt); }
+    .sp-photo {
+      width: 54px; height: 54px; border-radius: 50%;
+      background: var(--ivory2); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; margin-bottom: 1rem; overflow: hidden;
+    }
+    .sp-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .speaker-card h3  { font-size: 0.9rem; font-weight: 600; color: var(--navy); margin-bottom: 0.2rem; }
+    .speaker-card .affil { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+    .sp-tag {
+      display: inline-block; margin-top: 0.6rem;
+      font-size: 0.67rem; font-weight: 500;
+      color: var(--gold); background: var(--gold-lt);
+      padding: 0.12rem 0.5rem; border-radius: 3px;
+      border: 1px solid #ddc898;
+    }
+
+    /* ── SCHEDULE ── */
+    .sched-list { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+    .sched-section-label {
+      background: var(--ivory2); padding: 0.48rem 1.4rem;
+      font-size: 0.67rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border);
+    }
+    .sched-row {
+      display: grid; grid-template-columns: 80px 10px 1fr;
+      gap: 0 1rem; align-items: center;
+      padding: 0.82rem 1.4rem; border-bottom: 1px solid var(--border);
+      background: var(--surface); transition: background 0.12s;
+    }
+    .sched-row:last-child { border-bottom: none; }
+    .sched-row:hover { background: var(--ivory2); }
+    .sched-row.break { background: var(--ivory); opacity: 0.75; }
+    .sched-row.break:hover { background: var(--ivory); }
+    .sched-row.highlight { background: var(--green-lt); }
+    .sched-row.highlight:hover { background: #d5e4da; }
+    .sched-time { font-size: 0.71rem; font-weight: 500; color: var(--muted); white-space: nowrap; }
+    .sched-dot  { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .sched-row.keynote .sched-dot { background: var(--navy); }
+    .sched-row.break   .sched-dot { background: var(--border2); }
+    .sched-row.posters .sched-dot { background: var(--green); }
+    .sched-row.panel   .sched-dot { background: var(--gold); }
+    .sched-row.talk    .sched-dot { background: var(--ink2); }
+    .sched-info h4 { font-size: 0.87rem; font-weight: 600; color: var(--navy); }
+    .sched-info p  { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+
+    /* ── CALL FOR POSTERS ── */
+    .cfp-layout { display: grid; grid-template-columns: 1fr 330px; gap: 3rem; margin-top: 2rem; }
+    .cfp-main p { font-size: 1rem; line-height: 1.8; color: var(--ink2); margin-bottom: 1.4rem; }
+    .cfp-topics { list-style: none; padding: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .cfp-topics li {
+      padding: 0.68rem 1.2rem; border-bottom: 1px solid var(--border);
+      font-size: 0.87rem; color: var(--ink2);
+      display: flex; align-items: center; gap: 0.65rem;
+      background: var(--surface); transition: background 0.12s;
+    }
+    .cfp-topics li:last-child { border-bottom: none; }
+    .cfp-topics li:hover { background: var(--gold-lt); }
+    .cfp-topics li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+    .cfp-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.4rem; margin-bottom: 1rem; }
+    .cfp-card h3 { font-size: 0.76rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; }
+    .date-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
+    .date-row:last-child { border-bottom: none; }
+    .date-row .label { color: var(--ink2); }
+    .date-row .val   { font-weight: 600; color: var(--gold); font-size: 0.79rem; }
+    .format-box {
+      background: var(--ivory2); border: 1px solid var(--border); border-radius: 6px;
+      padding: 1rem 1.2rem; font-size: 0.8rem; color: var(--ink2); line-height: 1.6; margin-top: 1rem;
+    }
+    .format-box strong { color: var(--navy); display: block; margin-bottom: 0.3rem; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.07em; }
+
+    /* ── ORGANIZERS ── */
+    .org-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .org-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      padding: 1.15rem 1.3rem; display: flex; align-items: center; gap: 1rem;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .org-card:hover { border-color: var(--gold); box-shadow: 0 2px 10px rgba(160,120,48,0.1); }
+    .org-photo {
+      width: 46px; height: 46px; flex-shrink: 0; border-radius: 50%;
+      background: var(--ivory2); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; overflow: hidden;
+    }
+    .org-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .org-info h3 { font-size: 0.87rem; font-weight: 600; }
+    .org-info h3 a { color: var(--navy); text-decoration: none; }
+    .org-info h3 a:hover { color: var(--gold); text-decoration: underline; }
+    .org-info p  { font-size: 0.73rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.4; }
+    .contact-box {
+      margin-top: 2.8rem; padding: 1.1rem 1.5rem;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 7px;
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-size: 0.87rem; color: var(--ink2);
+    }
+    .contact-box a { color: var(--green); text-decoration: none; font-weight: 500; }
+    .contact-box a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 2rem 2rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      font-size: 0.74rem; color: var(--muted);
+    }
+    footer a { color: var(--ink2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── FADE-IN ── */
+    @keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-inner { animation: fadein 0.5s ease both; }
+
+    @media (max-width: 860px) {
+      .hero-inner  { grid-template-columns: 1fr; }
+      .hero-aside  { display: none; }
+      .about-grid  { grid-template-columns: 1fr; }
+      .cfp-layout  { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      h1 { font-size: 2rem; }
+      .section-inner { padding: 3.5rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">Adaptive Experimentation · 2026</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#speakers">Speakers</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#posters">Call for Posters</a></li>
+      <li><a href="#organizers">Organizers</a></li>
+    </ul>
+    <a class="nav-cta" href="#posters">Submit →</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<div id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag"><span></span>Workshop · Conference 2026</div>
+      <h1>Advances in<br><em>Adaptive Experimentation</em></h1>
+      <p class="hero-desc">
+        Bridging bandit algorithms, causal inference, and semiparametric statistics
+        for principled, efficient real-world experimentation.
+      </p>
+      <div class="hero-btns">
+        <a class="btn btn-green" href="#posters">Submit a Poster</a>
+        <a class="btn btn-outline" href="#about">About the Workshop</a>
+      </div>
+    </div>
+    <div class="hero-aside" aria-hidden="true">
+      <div class="aside-label">UCB — Estimated Reward per Arm</div>
+      <div class="bandit-bars">
+        <div class="b-col"><div class="b-val">0.52</div><div class="b-bar-wrap"><div class="b-bar"></div></div><div class="b-ci"></div><div class="b-name">a₁</div></div>
+        <div class="b-col"><div class="b-val">0.79</div><div class="b-bar-wrap"><div class="b-bar"></div></div><div class="b-ci"></div><div class="b-name">a₂</div></div>
+        <div class="b-col"><div class="b-val">0.36</div><div class="b-bar-wrap"><div class="b-bar"></div></div><div class="b-ci"></div><div class="b-name">a₃</div></div>
+        <div class="b-col"><div class="b-val">0.64</div><div class="b-bar-wrap"><div class="b-bar"></div></div><div class="b-ci"></div><div class="b-name">a₄</div></div>
+        <div class="b-col"><div class="b-val" style="color:var(--gold);font-weight:700;">0.91 ★</div><div class="b-bar-wrap"><div class="b-bar"></div></div><div class="b-ci"></div><div class="b-name">a₅</div></div>
+      </div>
+      <div class="bandit-caption"><strong>Arm 5 selected.</strong> UCB pulls the arm with highest upper confidence bound — balancing exploration and exploitation.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<div class="section" id="about">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-number">01 — About</div>
+      <h2>Workshop Overview</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Adaptive experimentation — from multi-armed bandits to contextual and causal adaptive designs — is transforming how we collect data and draw conclusions across science, medicine, and technology. Yet fundamental questions remain open: How do we perform valid causal inference under adaptive sampling? What are the efficiency limits? How do we handle delayed or partial feedback?</p>
+        <p>This workshop brings together researchers from <strong>bandit theory</strong>, <strong>causal inference</strong>, <strong>semiparametric statistics</strong>, and <strong>reinforcement learning</strong> to take stock of recent progress and chart the path forward. We aim to bridge communities that rarely share a venue, and catalyse collaborations around the shared challenge of learning to act optimally while guaranteeing statistically valid conclusions.</p>
+      </div>
+      <div class="topics-list">
+        <div class="topic-row"><span class="topic-num">i</span><div><h3>Bandit Algorithms</h3><p>UCB, Thompson Sampling, LinUCB, best-arm identification, regret bounds.</p></div></div>
+        <div class="topic-row"><span class="topic-num">ii</span><div><h3>Adaptive Experiments</h3><p>AIPW, anytime-valid inference, sequential testing, online-to-batch conversion.</p></div></div>
+        <div class="topic-row"><span class="topic-num">iii</span><div><h3>Off-Policy Evaluation</h3><p>Doubly robust estimators, importance weighting, kernel-based OPE.</p></div></div>
+        <div class="topic-row"><span class="topic-num">iv</span><div><h3>Causal Inference</h3><p>Structural causal models, instrumental variables, mediation, causal bandits.</p></div></div>
+        <div class="topic-row"><span class="topic-num">v</span><div><h3>Semiparametric Theory</h3><p>Efficient influence functions, Riesz representers, debiased / double ML.</p></div></div>
+        <div class="topic-row"><span class="topic-num">vi</span><div><h3>Applications</h3><p>Clinical trials, A/B testing at scale, recommender systems, public policy.</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SPEAKERS ═══ -->
+<div class="section" id="speakers" style="background:var(--surface);">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-number">02 — Invited Speakers</div>
+      <h2>Confirmed Speakers</h2>
+      <p class="section-intro">Leading researchers at the intersection of adaptive experimentation, causal inference, and sequential decision-making.</p>
+    </div>
+    <div class="speakers-grid">
+      <div class="speaker-card"><div class="sp-photo">🧑‍🏫</div><h3>Speaker Name</h3><div class="affil">University · Country</div><div class="sp-tag">Causal Bandits</div></div>
+      <div class="speaker-card"><div class="sp-photo">👩‍🔬</div><h3>Speaker Name</h3><div class="affil">Institute · Country</div><div class="sp-tag">Semiparametric Efficiency</div></div>
+      <div class="speaker-card"><div class="sp-photo">🧑‍💻</div><h3>Speaker Name</h3><div class="affil">Research Lab · Country</div><div class="sp-tag">Adaptive Testing</div></div>
+      <div class="speaker-card"><div class="sp-photo">👩‍💻</div><h3>Speaker Name</h3><div class="affil">University · Country</div><div class="sp-tag">Off-Policy Evaluation</div></div>
+      <div class="speaker-card"><div class="sp-photo">🧑‍🎓</div><h3>Speaker Name</h3><div class="affil">Company · Country</div><div class="sp-tag">Bandit Algorithms</div></div>
+      <div class="speaker-card"><div class="sp-photo">👩‍🏫</div><h3>Speaker Name</h3><div class="affil">University · Country</div><div class="sp-tag">Sequential Inference</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SCHEDULE ═══ -->
+<div class="section" id="schedule">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-number">03 — Schedule</div>
+      <h2>Programme</h2>
+      <p class="section-intro">Indicative schedule — all times local. Full programme confirmed closer to the workshop date.</p>
+    </div>
+    <div class="sched-list">
+      <div class="sched-section-label">Morning</div>
+      <div class="sched-row talk">   <div class="sched-time">09:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Opening Remarks</h4><p>Organizers</p></div></div>
+      <div class="sched-row keynote"><div class="sched-time">09:15</div><div class="sched-dot"></div><div class="sched-info"><h4>Invited Talk 1 — TBA</h4><p>Speaker Name · Affiliation</p></div></div>
+      <div class="sched-row keynote"><div class="sched-time">10:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Invited Talk 2 — TBA</h4><p>Speaker Name · Affiliation</p></div></div>
+      <div class="sched-row break">  <div class="sched-time">10:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Coffee Break</h4></div></div>
+      <div class="sched-row keynote"><div class="sched-time">11:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Invited Talk 3 — TBA</h4><p>Speaker Name · Affiliation</p></div></div>
+      <div class="sched-row keynote"><div class="sched-time">11:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Invited Talk 4 — TBA</h4><p>Speaker Name · Affiliation</p></div></div>
+      <div class="sched-section-label">Afternoon</div>
+      <div class="sched-row break">  <div class="sched-time">12:30</div><div class="sched-dot"></div><div class="sched-info"><h4>Lunch Break</h4></div></div>
+      <div class="sched-row keynote"><div class="sched-time">14:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Invited Talk 5 — TBA</h4><p>Speaker Name · Affiliation</p></div></div>
+      <div class="sched-row keynote"><div class="sched-time">14:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Invited Talk 6 — TBA</h4><p>Speaker Name · Affiliation</p></div></div>
+      <div class="sched-row posters highlight"><div class="sched-time">15:30</div><div class="sched-dot"></div><div class="sched-info"><h4>Poster Session</h4><p>All accepted poster submissions</p></div></div>
+      <div class="sched-row panel"> <div class="sched-time">17:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Panel Discussion</h4><p>Open problems &amp; future directions</p></div></div>
+      <div class="sched-row talk">  <div class="sched-time">17:50</div><div class="sched-dot"></div><div class="sched-info"><h4>Closing Remarks</h4><p>Organizers</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CALL FOR POSTERS ═══ -->
+<div class="section" id="posters" style="background:var(--surface);">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-number">04 — Call for Posters</div>
+      <h2>Submit Your Work</h2>
+    </div>
+    <div class="cfp-layout">
+      <div class="cfp-main">
+        <p>We invite poster submissions on recent or ongoing work at the intersection of adaptive experimentation, bandit algorithms, causal inference, and sequential decision-making. Both theoretical and empirical contributions are welcome. Work under review or recently published at a major venue is eligible.</p>
+        <ul class="cfp-topics">
+          <li>Bandit algorithms and regret analysis</li>
+          <li>Causal inference with adaptive data collection</li>
+          <li>Off-policy evaluation and learning</li>
+          <li>Anytime-valid and sequential hypothesis testing</li>
+          <li>Doubly robust and debiased machine learning</li>
+          <li>Reinforcement learning and causal RL</li>
+          <li>Experimental design and sample complexity</li>
+          <li>Real-world applications and case studies</li>
+        </ul>
+        <div class="format-box">
+          <strong>Submission Format</strong>
+          Extended abstract · up to 4 pages (excl. references) · PDF · Workshop style. Non-anonymised submissions accepted.
+        </div>
+        <a class="btn btn-green" href="#" style="margin-top:1.4rem;">Submit on OpenReview →</a>
+      </div>
+      <div class="cfp-sidebar">
+        <div class="cfp-card">
+          <h3>Important Dates</h3>
+          <div class="date-row"><span class="label">Portal opens</span><span class="val">TBA</span></div>
+          <div class="date-row"><span class="label">Submission deadline</span><span class="val">TBA</span></div>
+          <div class="date-row"><span class="label">Notification</span><span class="val">TBA</span></div>
+          <div class="date-row"><span class="label">Camera-ready</span><span class="val">TBA</span></div>
+          <div class="date-row"><span class="label">Workshop day</span><span class="val">2026</span></div>
+        </div>
+        <div class="cfp-card">
+          <h3>Eligibility</h3>
+          <p style="font-size:0.82rem;color:var(--ink2);line-height:1.6;">Papers accepted at ICML, NeurIPS, ICLR 2025–2026 and papers currently under review are all eligible for submission.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ORGANIZERS ═══ -->
+<div class="section" id="organizers">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-number">05 — Organizers</div>
+      <h2>Organizing Committee</h2>
+    </div>
+    <div class="org-grid">
+      <div class="org-card"><div class="org-photo">🧑‍🔬</div><div class="org-info"><h3><a href="#">Organizer Name</a></h3><p>Institution · Country</p></div></div>
+      <div class="org-card"><div class="org-photo">👩‍🔬</div><div class="org-info"><h3><a href="#">Organizer Name</a></h3><p>Institution · Country</p></div></div>
+      <div class="org-card"><div class="org-photo">🧑‍💻</div><div class="org-info"><h3><a href="#">Organizer Name</a></h3><p>Institution · Country</p></div></div>
+      <div class="org-card"><div class="org-photo">👩‍💻</div><div class="org-info"><h3><a href="#">Organizer Name</a></h3><p>Institution · Country</p></div></div>
+      <div class="org-card"><div class="org-photo">🧑‍🎓</div><div class="org-info"><h3><a href="#">Organizer Name</a></h3><p>Institution · Country</p></div></div>
+    </div>
+    <div class="contact-box">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      Questions? <a href="mailto:workshop@example.com">workshop@example.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <span>Advances in Adaptive Experimentation · Workshop 2026</span>
+  <span><a href="https://github.com/your-org/your-repo">GitHub</a> · Built with HTML/CSS</span>
+</footer>
+
+</body>
+</html>
