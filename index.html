@@ -141,8 +141,8 @@
   .b-col:nth-child(4) .b-bar { height: 64%; background: #a9968b; animation-delay:.4s }
   .b-col:nth-child(5) .b-bar { height: 92%; background: var(--accent); animation-delay:.5s }
   @keyframes bar-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-  .b-name { font-size: 0.6rem; color: var(--muted); font-weight: 500; }
-  .b-val  { font-size: 0.65rem; font-weight: 600; color: var(--ink2); }
+  .b-name { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+  .b-val  { font-size: 0.95rem; font-weight: 700; color: var(--ink2); }
   .b-col:nth-child(5) .b-val { color: var(--accent); }
   .bandit-caption {
     font-size: 0.69rem; color: var(--muted); line-height: 1.55;
@@ -174,16 +174,23 @@
   .topic-row p  { font-size: 0.76rem; color: var(--muted); line-height: 1.5; }
 
   .speakers-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
   }
-  .speaker-card { background: var(--surface); padding: 1.4rem 1.3rem; transition: background 0.15s; }
+  .speaker-card { background: var(--surface); padding: 1.8rem 1.5rem; transition: background 0.15s; }
   .speaker-card:hover { background: var(--surface2); }
   .sp-photo {
-    width: 48px; height: 48px; border-radius: 50%;
+    width: 128px; height: 128px; border-radius: 50%;
     background: var(--surface2); border: 1px solid var(--border2);
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; margin-bottom: 0.9rem; overflow: hidden;
+    font-size: 1.1rem; margin-bottom: 1.1rem; overflow: hidden;
+  }
+  .sp-photo img,
+  .org-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .speaker-card h3  { font-size: 0.87rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
   .speaker-card .affil { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
@@ -264,6 +271,63 @@
     line-height: 1.55;
     color: var(--ink2);
   }
+  .open-problems-tease {
+    margin: 0 0 1.4rem;
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #f6eefb 0%, #f7f0e7 100%);
+  }
+  .open-problems-head {
+    padding: 1.2rem 1.3rem 1rem;
+    border-bottom: 1px solid rgba(92,36,131,0.12);
+  }
+  .open-problems-kicker {
+    display: inline-block;
+    margin-bottom: 0.45rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .open-problems-head h3 {
+    font-family: var(--serif);
+    font-size: clamp(1.35rem, 2vw, 1.8rem);
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--accent);
+    margin-bottom: 0.45rem;
+  }
+  .open-problems-head p {
+    max-width: 760px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink2);
+  }
+  .open-problems-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: rgba(92,36,131,0.10);
+  }
+  .open-problems-step {
+    background: rgba(255,250,244,0.9);
+    padding: 1rem 1.15rem 1.05rem;
+  }
+  .open-problems-step strong {
+    display: block;
+    margin-bottom: 0.28rem;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .open-problems-step span {
+    display: block;
+    font-size: 0.79rem;
+    line-height: 1.55;
+    color: var(--ink2);
+  }
   .sched-list { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
   .sched-section-label {
     background: var(--surface); padding: 0.78rem 1.4rem;
@@ -287,7 +351,7 @@
   .sched-row.keynote .sched-dot { background: var(--blue); }
   .sched-row.break   .sched-dot { background: var(--muted); }
   .sched-row.posters .sched-dot { background: var(--green); }
-  .sched-row.panel   .sched-dot { background: var(--accent); }
+  .sched-row.open    .sched-dot { background: var(--accent); }
   .sched-row.talk    .sched-dot { background: var(--border2); }
   .sched-info h4 { font-size: 0.84rem; font-weight: 600; color: var(--ink); }
   .sched-info p  { font-size: 0.72rem; color: var(--muted); margin-top: 0.1rem; }
@@ -319,12 +383,12 @@
   .org-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 0.9rem; }
   .org-card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
-    padding: 1.05rem 1.2rem; display: flex; align-items: center; gap: 0.9rem;
+    padding: 1.25rem 1.3rem; display: flex; align-items: center; gap: 1.1rem;
     transition: border-color 0.15s;
   }
   .org-card:hover { border-color: var(--accent); }
   .org-photo {
-    width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%;
+    width: 112px; height: 112px; flex-shrink: 0; border-radius: 50%;
     background: var(--surface2); border: 1px solid var(--border2);
     display: flex; align-items: center; justify-content: center;
     font-size: 0.95rem; overflow: hidden;
@@ -347,6 +411,14 @@
   }
   .location-copy p {
     font-size: 0.95rem; line-height: 1.8; color: var(--ink2); margin-bottom: 1rem;
+  }
+  .location-card ul {
+    margin: 0.8rem 0 0 1.1rem;
+    color: var(--ink2);
+  }
+  .location-card li {
+    margin-bottom: 0.55rem;
+    line-height: 1.65;
   }
   .location-card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
@@ -413,6 +485,8 @@
     .cfp-layout  { grid-template-columns: 1fr; }
     .location-layout { grid-template-columns: 1fr; }
     .schedule-emphasis { grid-template-columns: 1fr; }
+    .open-problems-steps { grid-template-columns: 1fr; }
+    .speakers-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 600px) {
     .nav-inner { grid-template-columns: 1fr auto; height: auto; padding: 0.8rem 1.2rem; }
@@ -423,6 +497,7 @@
     .section-inner { padding: 3.5rem 1.2rem; }
     .brand-grid { grid-template-columns: 1fr; }
     .schedule-days-grid { grid-template-columns: 1fr; }
+    .speakers-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -455,7 +530,7 @@
     <div class="hero-text">
       <div class="hero-tag"><span></span>Workshop · Gatsby Computational Neuroscience Unit · UCL · June 18-19, 2026</div>
       <h1>Adaptive Experimentation<br><em>Workshop</em></h1>
-      <p class="hero-desc">A two-day workshop at the Gatsby Computational Neuroscience Unit, UCL, on June 18-19, 2026, focused on adaptive experimentation, online learning, and modern statistical methods for sequential decision-making.</p>
+      <p class="hero-desc">A two-day workshop at the Gatsby Computational Neuroscience Unit, UCL, on June 18-19, 2026, focused on adaptive experimentation, causal inference, online learning, and modern statistical methods for sequential decision-making.</p>
       <div class="hero-btns">
         <a class="btn btn-accent" href="#posters">Submit a Poster</a>
         <a class="btn btn-outline" href="#location">Venue Details</a>
@@ -483,34 +558,32 @@
     </div>
     <div class="about-grid">
       <div class="about-text">
-        <p>This workshop brings together researchers working on adaptive experimentation, online learning, statistical inference, and related methods for sequential decision-making. It is intended as a focused meeting point for theory, methodology, and discussion across neighboring communities.</p>
-        <p>Hosted at the <strong>Gatsby Computational Neuroscience Unit</strong> at <strong>UCL</strong> on <strong>June 18-19, 2026</strong>, the workshop will feature invited talks, informal discussion, and a poster session. The goal is to create a compact event with strong technical depth and enough room for interaction.</p>
+        <p>This workshop brings together researchers working on adaptive experimentation, causal inference, online learning, and related methods for sequential decision-making. It is intended as a focused meeting point for theory, methodology, and discussion across neighboring communities.</p>
+        <p>Hosted at the <strong>Gatsby Computational Neuroscience Unit</strong> at <strong>UCL</strong> on <strong>June 18-19, 2026</strong>, the workshop will feature invited talks, informal discussion, and a poster session. The goal is to create an event with strong technical depth and enough room for interaction.</p>
       </div>
       <div class="topics-list">
-        <div class="topic-row"><span class="topic-num">i</span><div><h3>Adaptive Experimentation</h3><p>Sequential allocation, exploration-exploitation tradeoffs, and data-efficient decision-making.</p></div></div>
-        <div class="topic-row"><span class="topic-num">ii</span><div><h3>Bandits and Online Learning</h3><p>Regret minimization, best-arm identification, adversarial settings, and structured feedback.</p></div></div>
-        <div class="topic-row"><span class="topic-num">iii</span><div><h3>Statistical Inference</h3><p>Valid inference under adaptivity, uncertainty quantification, and sequential analysis.</p></div></div>
-        <div class="topic-row"><span class="topic-num">iv</span><div><h3>Causal and Off-Policy Methods</h3><p>Counterfactual evaluation, adaptive data collection, and policy assessment.</p></div></div>
-        <div class="topic-row"><span class="topic-num">v</span><div><h3>Theory Meets Practice</h3><p>Connections between mathematical guarantees, experiments, and real-world deployment.</p></div></div>
-        <div class="topic-row"><span class="topic-num">vi</span><div><h3>Open Problems</h3><p>Interfaces between learning, inference, and modern applications in science and technology.</p></div></div>
+        <div class="topic-row"><span class="topic-num">i</span><div><h3>Adaptive Experimentation</h3><p>Exploration-exploitation tradeoffs, stability conditions, adaptive data collection.</p></div></div>
+        <div class="topic-row"><span class="topic-num">ii</span><div><h3>Bandits and Online Learning</h3><p>Regret minimization, best arm identification, structured feedbacks.</p></div></div>
+        <div class="topic-row"><span class="topic-num">iii</span><div><h3>Causal Inference</h3><p>Identification, nuisance-robust methods, semiparametric efficiency theory.</p></div></div>
+        <div class="topic-row"><span class="topic-num">iv</span><div><h3>Open Problems</h3><p>Novel and/or open questions at the interface of online experimentation, learning and inference.</p></div></div>
       </div>
     </div>
   </div>
 </div>
 
 <div class="section" id="speakers" style="background:var(--bg2);">
-  <div class="section-inner">
+  <div class="section-inner" style="max-width:1320px;">
     <div class="section-header">
       <div class="section-number">02 — Invited Speakers</div>
       <h2>Confirmed Speakers</h2>
       <p class="section-intro">Confirmed speakers spanning bandits, online learning, inference, and modern adaptive methods.</p>
     </div>
     <div class="speakers-grid">
-      <div class="speaker-card"><div class="sp-photo">TL</div><h3>Tor Lattimore</h3><div class="affil">Confirmed Speaker</div><div class="sp-tag">Bandits</div></div>
-      <div class="speaker-card"><div class="sp-photo">GN</div><h3>Gergely Neu</h3><div class="affil">Confirmed Speaker</div><div class="sp-tag">Online Learning</div></div>
-      <div class="speaker-card"><div class="sp-photo">KK</div><h3>Khoulik Khamaru</h3><div class="affil">Confirmed Speaker</div><div class="sp-tag">Statistics</div></div>
-      <div class="speaker-card"><div class="sp-photo">KW</div><h3>Kelly Wang</h3><div class="affil">Confirmed Speaker</div><div class="sp-tag">Inference</div></div>
-      <div class="speaker-card"><div class="sp-photo">AB</div><h3>Aurelien Bibaut</h3><div class="affil">Confirmed Speaker</div><div class="sp-tag">Adaptive Methods</div></div>
+      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/lattimore.jpg" alt="Tor Lattimore"></div><h3>Tor Lattimore</h3><div class="affil">DeepMind</div><div class="sp-tag">Bandits</div></div>
+      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/gergely.jpg" alt="Gergely Neu"></div><h3>Gergely Neu</h3><div class="affil">ICREA &amp; UPF</div><div class="sp-tag">Online Learning</div></div>
+      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/koulik.jpg" alt="Koulik Khamaru"></div><h3>Koulik Khamaru</h3><div class="affil">Rutgers University</div><div class="sp-tag">Statistics</div></div>
+      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/kelly.webp" alt="Kelly Zhang"></div><h3>Kelly Zhang</h3><div class="affil">Imperial College London</div><div class="sp-tag">Inference</div></div>
+      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/aurelien.png" alt="Aurélien Bibaut"></div><h3>Aurélien Bibaut</h3><div class="affil">Netflix</div><div class="sp-tag">Adaptive Methods</div></div>
     </div>
   </div>
 </div>
@@ -520,7 +593,7 @@
     <div class="section-header">
       <div class="section-number">03 — Schedule</div>
       <h2>Two-Day Programme</h2>
-      <p class="section-intro">The programme spans two full days at Gatsby UCL on June 18-19, 2026, with invited talks, discussion, and posters across both days. Speaker order and exact timings can be refined once the programme is finalized.</p>
+      <p class="section-intro">The programme spans two full days at Gatsby UCL on June 18-19, 2026, with invited talks, an open problems session, and posters across both days. Speaker order and exact timings can be refined once the programme is finalized.</p>
     </div>
     <div class="schedule-emphasis" aria-label="Two-day programme overview">
       <div class="schedule-count">
@@ -531,12 +604,32 @@
         <div class="schedule-day-card">
           <span class="schedule-day-kicker">Day 1</span>
           <strong>Thursday, June 18</strong>
-          <span>Invited talks, coffee breaks, and a closing panel discussion.</span>
+          <span>Invited talks, coffee breaks, and an open problems session.</span>
         </div>
         <div class="schedule-day-card">
           <span class="schedule-day-kicker">Day 2</span>
           <strong>Friday, June 19</strong>
-          <span>Invited and student talks, followed by the poster session.</span>
+          <span>Invited talks, a contributed talk, and the poster session.</span>
+        </div>
+      </div>
+    </div>
+    <div class="open-problems-tease" aria-label="Open problems session">
+      <div class="open-problems-head">
+        <h3>Open Problems Session</h3>
+        <p>The workshop will include a dedicated open problems session: a space for sharp questions, partial ideas, and technically interesting obstacles that deserve collective attention.</p>
+      </div>
+      <div class="open-problems-steps">
+        <div class="open-problems-step">
+          <strong>Pitch the question</strong>
+          <span>Present a problem, conjecture, limitation, or unresolved technical point in a concise format.</span>
+        </div>
+        <div class="open-problems-step">
+          <strong>Open the discussion</strong>
+          <span>Use the room to test intuitions, connect methods, and surface approaches from neighboring areas.</span>
+        </div>
+        <div class="open-problems-step">
+          <strong>Leave with leads</strong>
+          <span>The goal is not a polished result, but a better question, a sharper framing, or a new collaboration.</span>
         </div>
       </div>
     </div>
@@ -544,25 +637,24 @@
       <div class="sched-section-label">Day 1 · June 18</div>
       <div class="sched-row break">  <div class="sched-time">09:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Coffee</h4></div></div>
       <div class="sched-row talk">   <div class="sched-time">09:30 - 09:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Introduction</h4><p>Organizers</p></div></div>
-      <div class="sched-row keynote"><div class="sched-time">09:45 - 10:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Invited Talk</h4><p>Koulik Khamaru</p></div></div>
+      <div class="sched-row keynote"><div class="sched-time">09:45 - 10:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Tor Lattimore</h4><p>Invited Talk: TBA</p></div></div>
       <div class="sched-row break">  <div class="sched-time">10:45 - 11:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Coffee Break</h4></div></div>
-      <div class="sched-row keynote"><div class="sched-time">11:00 - 12:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Invited Talk</h4><p>Kelly Wang</p></div></div>
+      <div class="sched-row keynote"><div class="sched-time">11:00 - 12:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Aurélien Bibaut</h4><p>Invited Talk: TBA</p></div></div>
       <div class="sched-row break">  <div class="sched-time">12:00 - 13:30</div><div class="sched-dot"></div><div class="sched-info"><h4>Lunch</h4></div></div>
-      <div class="sched-row keynote"><div class="sched-time">13:30 - 14:30</div><div class="sched-dot"></div><div class="sched-info"><h4>Invited Talk</h4><p>Tor Lattimore</p></div></div>
+      <div class="sched-row keynote"><div class="sched-time">13:30 - 14:30</div><div class="sched-dot"></div><div class="sched-info"><h4>Gergely Neu</h4><p>Invited Talk: TBA</p></div></div>
       <div class="sched-row break">  <div class="sched-time">14:30 - 14:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Coffee Break</h4></div></div>
-      <div class="sched-row keynote"><div class="sched-time">14:45 - 15:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Invited Talk</h4><p>Aurelien Bibaut</p></div></div>
+      <div class="sched-row keynote"><div class="sched-time">14:45 - 15:45</div><div class="sched-dot"></div><div class="sched-info"><h4>TBA</h4><p>Invited Talk: TBA</p></div></div>
       <div class="sched-row break">  <div class="sched-time">15:45 - 16:15</div><div class="sched-dot"></div><div class="sched-info"><h4>Coffee Break</h4></div></div>
-      <div class="sched-row panel"> <div class="sched-time">16:15 - 17:15</div><div class="sched-dot"></div><div class="sched-info"><h4>Panel</h4><p>Discussion with invited speakers</p></div></div>
+      <div class="sched-row open">  <div class="sched-time">16:15 - 17:15</div><div class="sched-dot"></div><div class="sched-info"><h4>Open Problems Session</h4><p>Short presentations and discussion of open questions</p></div></div>
 
       <div class="sched-section-label">Day 2 · June 19</div>
       <div class="sched-row break">  <div class="sched-time">09:30 - 09:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Coffee</h4></div></div>
-      <div class="sched-row keynote"><div class="sched-time">09:45 - 10:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Invited Talk</h4><p>Gergely Neu</p></div></div>
+      <div class="sched-row keynote"><div class="sched-time">09:45 - 10:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Koulik Khamaru</h4><p>Invited Talk: TBA</p></div></div>
       <div class="sched-row break">  <div class="sched-time">10:45 - 11:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Coffee Break</h4></div></div>
-      <div class="sched-row talk">  <div class="sched-time">11:00 - 12:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Talk</h4><p>Houssam Zenati</p></div></div>
+      <div class="sched-row keynote"><div class="sched-time">11:00 - 12:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Kelly Zhang</h4><p>Invited Talk: TBA</p></div></div>
       <div class="sched-row break">  <div class="sched-time">12:00 - 13:30</div><div class="sched-dot"></div><div class="sched-info"><h4>Lunch</h4></div></div>
-      <div class="sched-row talk">  <div class="sched-time">13:30 - 14:15</div><div class="sched-dot"></div><div class="sched-info"><h4>Student Talk 1</h4><p>Zikai Shen?</p></div></div>
-      <div class="sched-row talk">  <div class="sched-time">14:15 - 14:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Student Talk 2</h4><p>To be confirmed</p></div></div>
-      <div class="sched-row posters highlight"><div class="sched-time">14:45 - 17:15</div><div class="sched-dot"></div><div class="sched-info"><h4>Poster Session</h4><p>Accepted posters</p></div></div>
+      <div class="sched-row talk">  <div class="sched-time">13:30 - 14:15</div><div class="sched-dot"></div><div class="sched-info"><h4>Houssam Zenati</h4><p>Talk: Fast Best-in-Class Regret for Contextual Bandits</p></div></div>
+      <div class="sched-row posters highlight"><div class="sched-time">14:15 - 17:15</div><div class="sched-dot"></div><div class="sched-info"><h4>Poster Session</h4><p>Accepted posters</p></div></div>
     </div>
   </div>
 </div>
@@ -575,19 +667,17 @@
     </div>
     <div class="cfp-layout">
       <div class="cfp-main">
-        <p>We invite poster submissions on recent or ongoing theoretical work in adaptive experimentation and closely related foundations of sequential decision-making. The submission process will be lightweight and handled through a Google Form rather than a conference-style reviewing platform.</p>
+        <p>We invite poster submissions on recent or ongoing theoretical work in adaptive experimentation and closely related foundations of sequential decision-making.</p>
         <ul class="cfp-topics">
-          <li>Poster submissions collected through a Google Form</li>
-          <li>Required fields: poster title and abstract</li>
-          <li>No OpenReview or conference-style submission workflow</li>
+          <li>Submit a poster title and abstract</li>
           <li>Suitable for ongoing theoretical work, recent results, or discussion-stage ideas</li>
           <li>Submissions should foreground a theoretical contribution in adaptive experimentation</li>
         </ul>
         <div class="format-box">
           <strong>Submission Format</strong>
-          Google Form submission with a title and abstract describing the theoretical contribution. No PDF upload and no OpenReview formatting requirements.
+          Google Form submission with a title, abstract and URL link if publicly available.
         </div>
-        <a class="btn btn-accent" href="https://forms.gle/W2txPTPNfndZacnE7" style="margin-top:1.3rem;">Submit via Google Form →</a>
+        <a class="btn btn-accent" href="https://forms.gle/W2txPTPNfndZacnE7" style="margin-top:1.3rem;">Submit →</a>
       </div>
       <div class="cfp-sidebar">
         <div class="cfp-card">
@@ -597,10 +687,6 @@
           <div class="date-row"><span class="label">Acceptance notice</span><span class="val">TBA</span></div>
           <div class="date-row"><span class="label">Workshop day 1</span><span class="val">June 18, 2026</span></div>
           <div class="date-row"><span class="label">Workshop day 2</span><span class="val">June 19, 2026</span></div>
-        </div>
-        <div class="cfp-card">
-          <h3>What To Submit</h3>
-          <p style="font-size:0.8rem;color:var(--ink2);line-height:1.6;">A poster title and short abstract describing the theoretical contribution are sufficient. Use the Google Form to submit directly.</p>
         </div>
       </div>
     </div>
@@ -614,9 +700,9 @@
       <h2>Organizing Committee</h2>
     </div>
     <div class="org-grid">
-      <div class="org-card"><div class="org-photo">HZ</div><div class="org-info"><h3><a href="#">Houssam Zenati</a></h3><p>Gatsby Computational Neuroscience Unit · UCL</p></div></div>
-      <div class="org-card"><div class="org-photo">BB</div><div class="org-info"><h3><a href="#">Bariscan Bozkurt</a></h3><p>Gatsby Computational Neuroscience Unit · UCL</p></div></div>
-      <div class="org-card"><div class="org-photo">AG</div><div class="org-info"><h3><a href="#">Arthur Gretton</a></h3><p>Gatsby Computational Neuroscience Unit · UCL</p></div></div>
+      <div class="org-card"><div class="org-photo"><img src="images/organizers/houssam.jpeg" alt="Houssam Zenati"></div><div class="org-info"><h3><a href="#">Houssam Zenati</a></h3><p>Gatsby Computational Neuroscience Unit · UCL</p></div></div>
+      <div class="org-card"><div class="org-photo"><img src="images/organizers/bariscan.jpeg" alt="Bariscan Bozkurt"></div><div class="org-info"><h3><a href="#">Bariscan Bozkurt</a></h3><p>Gatsby Computational Neuroscience Unit · UCL</p></div></div>
+      <div class="org-card"><div class="org-photo"><img src="images/organizers/arthur.jpeg" alt="Arthur Gretton"></div><div class="org-info"><h3><a href="#">Arthur Gretton</a></h3><p>Gatsby Computational Neuroscience Unit · UCL</p></div></div>
     </div>
     <div class="contact-box">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -640,7 +726,13 @@
         </div>
         <div class="location-card" style="margin-top:1rem;">
           <h3>Getting There</h3>
-          <p>The venue is located in Fitzrovia, within easy reach of central London transport links and the wider UCL area. This page section is intended to give attendees a clear venue reference alongside the host institutions.</p>
+          <p>The venue is located in Fitzrovia, within easy reach of central London transport links and the wider UCL area.</p>
+          <ul>
+            <li><strong>Goodge Street</strong> — Northern line — about 5 to 10 minutes on foot</li>
+            <li><strong>Warren Street</strong> — Northern and Victoria lines — about 8 minutes on foot</li>
+            <li><strong>Great Portland Street</strong> — Circle, Hammersmith &amp; City, and Metropolitan lines — about 12 minutes on foot</li>
+            <li><strong>Tottenham Court Road</strong> — Northern and Central lines, plus the Elizabeth line — about 15 minutes on foot</li>
+          </ul>
         </div>
       </div>
       <div class="brand-grid">
@@ -652,7 +744,7 @@
         <div class="brand-panel ucl">
           <img class="venue-photo" src="UCL.jpg" alt="University College London campus">
           <div class="host-kicker">University</div>
-          <p>University College London, the institutional home of the workshop and its research community.</p>
+          <p>University College London.</p>
         </div>
       </div>
     </div>
