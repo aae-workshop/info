@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Adaptive Experimentation Workshop 2026 at Gatsby UCL</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
 <style>
   :root {
     --bg:       #f4efe7;
@@ -195,11 +195,80 @@
     letter-spacing: 0.04em; text-transform: uppercase;
   }
 
+  .schedule-emphasis {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 1rem;
+    margin: 1.6rem 0 1.4rem;
+    padding: 1.2rem;
+    background: linear-gradient(145deg, #f6eefb 0%, #f4ece3 100%);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    align-items: stretch;
+  }
+  .schedule-count {
+    background: rgba(255,255,255,0.45);
+    border: 1px solid rgba(92,36,131,0.16);
+    border-radius: 8px;
+    padding: 1rem 1.05rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .schedule-count-num {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 6vw, 4.4rem);
+    line-height: 0.9;
+    color: var(--accent);
+  }
+  .schedule-count-label {
+    margin-top: 0.55rem;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink2);
+  }
+  .schedule-days-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+  .schedule-day-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.95rem 1rem;
+  }
+  .schedule-day-kicker {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .schedule-day-card strong {
+    display: block;
+    margin-bottom: 0.28rem;
+    font-family: var(--serif);
+    font-size: 1.18rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .schedule-day-card span {
+    display: block;
+    font-size: 0.79rem;
+    line-height: 1.55;
+    color: var(--ink2);
+  }
   .sched-list { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
   .sched-section-label {
-    background: var(--surface); padding: 0.44rem 1.4rem;
-    font-size: 0.63rem; font-weight: 600; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border);
+    background: var(--surface); padding: 0.78rem 1.4rem;
+    font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--border);
   }
   .sched-row {
     display: grid; grid-template-columns: 72px 8px 1fr;
@@ -343,6 +412,7 @@
     .about-grid  { grid-template-columns: 1fr; }
     .cfp-layout  { grid-template-columns: 1fr; }
     .location-layout { grid-template-columns: 1fr; }
+    .schedule-emphasis { grid-template-columns: 1fr; }
   }
   @media (max-width: 600px) {
     .nav-inner { grid-template-columns: 1fr auto; height: auto; padding: 0.8rem 1.2rem; }
@@ -352,6 +422,7 @@
     h1 { font-size: 2rem; }
     .section-inner { padding: 3.5rem 1.2rem; }
     .brand-grid { grid-template-columns: 1fr; }
+    .schedule-days-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -448,8 +519,26 @@
   <div class="section-inner">
     <div class="section-header">
       <div class="section-number">03 — Schedule</div>
-      <h2>Programme</h2>
-      <p class="section-intro">Indicative two-day schedule for June 18-19, 2026 at UCL. Speaker order and exact timings can be refined once the programme is finalized.</p>
+      <h2>Two-Day Programme</h2>
+      <p class="section-intro">The programme spans two full days at Gatsby UCL on June 18-19, 2026, with invited talks, discussion, and posters across both days. Speaker order and exact timings can be refined once the programme is finalized.</p>
+    </div>
+    <div class="schedule-emphasis" aria-label="Two-day programme overview">
+      <div class="schedule-count">
+        <div class="schedule-count-num">2</div>
+        <div class="schedule-count-label">Days at Gatsby UCL</div>
+      </div>
+      <div class="schedule-days-grid">
+        <div class="schedule-day-card">
+          <span class="schedule-day-kicker">Day 1</span>
+          <strong>Thursday, June 18</strong>
+          <span>Invited talks, coffee breaks, and a closing panel discussion.</span>
+        </div>
+        <div class="schedule-day-card">
+          <span class="schedule-day-kicker">Day 2</span>
+          <strong>Friday, June 19</strong>
+          <span>Invited and student talks, followed by the poster session.</span>
+        </div>
+      </div>
     </div>
     <div class="sched-list">
       <div class="sched-section-label">Day 1 · June 18</div>
@@ -486,17 +575,17 @@
     </div>
     <div class="cfp-layout">
       <div class="cfp-main">
-        <p>We invite poster submissions on recent or ongoing work related to adaptive experimentation, online learning, sequential decision-making, and nearby areas. The submission process will be lightweight and handled through a Google Form rather than a conference-style reviewing platform.</p>
+        <p>We invite poster submissions on recent or ongoing theoretical work in adaptive experimentation and closely related foundations of sequential decision-making. The submission process will be lightweight and handled through a Google Form rather than a conference-style reviewing platform.</p>
         <ul class="cfp-topics">
           <li>Poster submissions collected through a Google Form</li>
           <li>Required fields: poster title and abstract</li>
           <li>No OpenReview or conference-style submission workflow</li>
-          <li>Suitable for ongoing work, recent results, or discussion-stage projects</li>
-          <li>Theoretical, methodological, and applied contributions are all welcome</li>
+          <li>Suitable for ongoing theoretical work, recent results, or discussion-stage ideas</li>
+          <li>Submissions should foreground a theoretical contribution in adaptive experimentation</li>
         </ul>
         <div class="format-box">
           <strong>Submission Format</strong>
-          Google Form submission with a title and abstract. No PDF upload and no OpenReview formatting requirements.
+          Google Form submission with a title and abstract describing the theoretical contribution. No PDF upload and no OpenReview formatting requirements.
         </div>
         <a class="btn btn-accent" href="https://forms.gle/W2txPTPNfndZacnE7" style="margin-top:1.3rem;">Submit via Google Form →</a>
       </div>
@@ -511,7 +600,7 @@
         </div>
         <div class="cfp-card">
           <h3>What To Submit</h3>
-          <p style="font-size:0.8rem;color:var(--ink2);line-height:1.6;">A poster title and short abstract are sufficient. Use the Google Form to submit directly.</p>
+          <p style="font-size:0.8rem;color:var(--ink2);line-height:1.6;">A poster title and short abstract describing the theoretical contribution are sufficient. Use the Google Form to submit directly.</p>
         </div>
       </div>
     </div>
