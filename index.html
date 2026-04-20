@@ -86,16 +86,25 @@
   .hero-inner {
     max-width: 1100px; margin: 0 auto;
     padding: 5.5rem 2rem 5rem;
-    display: grid; grid-template-columns: 1fr 340px; gap: 4rem; align-items: center;
+    display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 3rem 4rem; align-items: start;
+    grid-template-areas:
+      "tag tag"
+      "text aside";
     animation: fadein 0.5s ease both;
+  }
+  .hero-text {
+    grid-area: text;
+    min-width: 0;
   }
   .hero-tag {
     display: inline-flex; align-items: center; gap: 0.55rem;
-    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
+    font-size: 1rem; font-weight: 700; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--accent);
     margin-bottom: 1.4rem;
+    white-space: nowrap;
+    grid-area: tag;
   }
-  .hero-tag span { width: 20px; height: 1px; background: var(--accent); display: inline-block; }
+  .hero-tag span { width: 40px; height: 2px; background: var(--accent); display: inline-block; }
   h1 {
     font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.4rem);
     font-weight: 400; line-height: 1.14; letter-spacing: -0.01em;
@@ -126,9 +135,11 @@
   .hero-aside {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: 6px; padding: 1.5rem 1.6rem;
+    grid-area: aside;
+    width: 100%;
   }
   .aside-label {
-    font-size: 0.63rem; font-weight: 600; letter-spacing: 0.1em;
+    font-size: 0.95rem; font-weight: 700; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem;
   }
   .bandit-bars { display: flex; align-items: flex-end; gap: 10px; height: 96px; margin-bottom: 0.8rem; }
@@ -141,8 +152,8 @@
   .b-col:nth-child(4) .b-bar { height: 64%; background: #a9968b; animation-delay:.4s }
   .b-col:nth-child(5) .b-bar { height: 92%; background: var(--accent); animation-delay:.5s }
   @keyframes bar-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-  .b-name { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
-  .b-val  { font-size: 0.95rem; font-weight: 700; color: var(--ink2); }
+  .b-name { font-size: 1.02rem; color: var(--muted); font-weight: 600; }
+  .b-val  { font-size: 1.45rem; font-weight: 800; color: var(--ink2); }
   .b-col:nth-child(5) .b-val { color: var(--accent); }
   .bandit-caption {
     font-size: 0.69rem; color: var(--muted); line-height: 1.55;
@@ -174,7 +185,7 @@
   .topic-row p  { font-size: 0.76rem; color: var(--muted); line-height: 1.5; }
 
   .speakers-grid {
-    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+    display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
   }
   .speaker-card { background: var(--surface); padding: 1.8rem 1.5rem; transition: background 0.15s; }
@@ -193,15 +204,18 @@
     display: block;
   }
   .speaker-card h3  { font-size: 0.87rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
-  .speaker-card .affil { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
-  .sp-tag {
-    display: inline-block; margin-top: 0.55rem;
-    font-size: 0.63rem; font-weight: 600;
-    color: var(--accent); background: var(--accent-lt);
-    padding: 0.1rem 0.45rem; border-radius: 2px;
-    letter-spacing: 0.04em; text-transform: uppercase;
+  .speaker-card .affil {
+    display: inline-block;
+    margin-top: 0.55rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-lt);
+    padding: 0.14rem 0.5rem;
+    border-radius: 2px;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
   }
-
   .schedule-emphasis {
     display: grid;
     grid-template-columns: 220px 1fr;
@@ -479,8 +493,13 @@
   @keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
   @media (max-width: 860px) {
-    .hero-inner  { grid-template-columns: 1fr; }
-    .hero-aside  { display: none; }
+    .hero-inner  {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "tag"
+        "text"
+        "aside";
+    }
     .about-grid  { grid-template-columns: 1fr; }
     .cfp-layout  { grid-template-columns: 1fr; }
     .location-layout { grid-template-columns: 1fr; }
@@ -517,7 +536,7 @@
         <li><a href="#organizers">Organizers</a></li>
         <li><a href="#location">Location</a></li>
       </ul>
-      <a class="nav-cta" href="#posters">Poster Submission →</a>
+      <a class="nav-cta" href="#posters">Workshop Application →</a>
     </div>
     <a class="nav-logo ucl" href="#hero" aria-label="UCL">
       <img src="ucl_logo.jpg" alt="UCL logo">
@@ -527,12 +546,12 @@
 
 <div id="hero">
   <div class="hero-inner">
+    <div class="hero-tag"><span></span>Workshop · Gatsby Computational Neuroscience Unit · UCL · June 18-19, 2026</div>
     <div class="hero-text">
-      <div class="hero-tag"><span></span>Workshop · Gatsby Computational Neuroscience Unit · UCL · June 18-19, 2026</div>
-      <h1>Adaptive Experimentation<br><em>Workshop</em></h1>
-      <p class="hero-desc">A two-day workshop at the Gatsby Computational Neuroscience Unit, UCL, on June 18-19, 2026, focused on adaptive experimentation, causal inference, online learning, and modern statistical methods for sequential decision-making.</p>
+      <h1>Advances in Adaptive<br><em>Experimentation Workshop</em></h1>
+      <p class="hero-desc">A two-day workshop at the Gatsby Computational Neuroscience Unit, UCL, on June 18-19, 2026, focused on adaptive experimentation, causal inference, online learning, and modern statistical methods for sequential decision-making.<br><br>We warmly encourage applications from researchers and students interested in these topics. Accepted applicants will be asked to pay a £10 registration fee for the workshop.</p>
       <div class="hero-btns">
-        <a class="btn btn-accent" href="#posters">Submit a Poster</a>
+        <a class="btn btn-accent" href="#posters">Workshop Application</a>
         <a class="btn btn-outline" href="#location">Venue Details</a>
       </div>
     </div>
@@ -540,7 +559,7 @@
       <div class="aside-label">Workshop Snapshot</div>
       <div class="bandit-bars">
         <div class="b-col"><div class="b-val">2</div><div class="b-bar-wrap"><div class="b-bar"></div></div><div class="b-name">days</div></div>
-        <div class="b-col"><div class="b-val">5</div><div class="b-bar-wrap"><div class="b-bar"></div></div><div class="b-name">speakers</div></div>
+        <div class="b-col"><div class="b-val">6</div><div class="b-bar-wrap"><div class="b-bar"></div></div><div class="b-name">speakers</div></div>
         <div class="b-col"><div class="b-val">UCL</div><div class="b-bar-wrap"><div class="b-bar"></div></div><div class="b-name">venue</div></div>
         <div class="b-col"><div class="b-val">Jun</div><div class="b-bar-wrap"><div class="b-bar"></div></div><div class="b-name">month</div></div>
         <div class="b-col"><div class="b-val" style="color:var(--accent);font-weight:700;">18-19</div><div class="b-bar-wrap"><div class="b-bar"></div></div><div class="b-name">dates</div></div>
@@ -579,11 +598,12 @@
       <p class="section-intro">Confirmed speakers spanning bandits, online learning, inference, and modern adaptive methods.</p>
     </div>
     <div class="speakers-grid">
-      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/lattimore.jpg" alt="Tor Lattimore"></div><h3>Tor Lattimore</h3><div class="affil">DeepMind</div><div class="sp-tag">Bandits</div></div>
-      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/gergely.jpg" alt="Gergely Neu"></div><h3>Gergely Neu</h3><div class="affil">ICREA &amp; UPF</div><div class="sp-tag">Online Learning</div></div>
-      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/koulik.jpg" alt="Koulik Khamaru"></div><h3>Koulik Khamaru</h3><div class="affil">Rutgers University</div><div class="sp-tag">Statistics</div></div>
-      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/kelly.webp" alt="Kelly Zhang"></div><h3>Kelly Zhang</h3><div class="affil">Imperial College London</div><div class="sp-tag">Inference</div></div>
-      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/aurelien.png" alt="Aurélien Bibaut"></div><h3>Aurélien Bibaut</h3><div class="affil">Netflix</div><div class="sp-tag">Adaptive Methods</div></div>
+      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/lattimore.jpg" alt="Tor Lattimore"></div><h3>Tor Lattimore</h3><div class="affil">DeepMind</div></div>
+      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/gergely.jpg" alt="Gergely Neu"></div><h3>Gergely Neu</h3><div class="affil">ICREA &amp; UPF</div></div>
+      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/koulik.jpg" alt="Koulik Khamaru"></div><h3>Koulik Khamaru</h3><div class="affil">Rutgers University</div></div>
+      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/kelly.webp" alt="Kelly Zhang"></div><h3>Kelly Zhang</h3><div class="affil">Imperial College London</div></div>
+      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/aurelien.png" alt="Aurélien Bibaut"></div><h3>Aurélien Bibaut</h3><div class="affil">Netflix</div></div>
+      <div class="speaker-card"><div class="sp-photo"><img src="images/speakers/ian.jpeg" alt="Ian Waudby-Smith"></div><h3>Ian Waudby-Smith</h3><div class="affil">UC Berkeley</div></div>
     </div>
   </div>
 </div>
@@ -639,7 +659,7 @@
       <div class="sched-row talk">   <div class="sched-time">09:30 - 09:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Introduction</h4><p>Organizers</p></div></div>
       <div class="sched-row keynote"><div class="sched-time">09:45 - 10:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Tor Lattimore</h4><p>Invited Talk: TBA</p></div></div>
       <div class="sched-row break">  <div class="sched-time">10:45 - 11:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Coffee Break</h4></div></div>
-      <div class="sched-row keynote"><div class="sched-time">11:00 - 12:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Aurélien Bibaut</h4><p>Invited Talk: TBA</p></div></div>
+      <div class="sched-row keynote"><div class="sched-time">11:00 - 12:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Aurélien Bibaut</h4><p>Talk: Fast Best-in-Class Regret for Contextual Bandits</p></div></div>
       <div class="sched-row break">  <div class="sched-time">12:00 - 13:30</div><div class="sched-dot"></div><div class="sched-info"><h4>Lunch</h4></div></div>
       <div class="sched-row keynote"><div class="sched-time">13:30 - 14:30</div><div class="sched-dot"></div><div class="sched-info"><h4>Gergely Neu</h4><p>Invited Talk: TBA</p></div></div>
       <div class="sched-row break">  <div class="sched-time">14:30 - 14:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Coffee Break</h4></div></div>
@@ -651,9 +671,9 @@
       <div class="sched-row break">  <div class="sched-time">09:30 - 09:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Coffee</h4></div></div>
       <div class="sched-row keynote"><div class="sched-time">09:45 - 10:45</div><div class="sched-dot"></div><div class="sched-info"><h4>Koulik Khamaru</h4><p>Invited Talk: TBA</p></div></div>
       <div class="sched-row break">  <div class="sched-time">10:45 - 11:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Coffee Break</h4></div></div>
-      <div class="sched-row keynote"><div class="sched-time">11:00 - 12:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Kelly Zhang</h4><p>Invited Talk: TBA</p></div></div>
+      <div class="sched-row keynote"><div class="sched-time">11:00 - 12:00</div><div class="sched-dot"></div><div class="sched-info"><h4>Kelly Zhang</h4><p>Talk: Impatient Bandits: Optimizing for the Long-Term Without Delay</p></div></div>
       <div class="sched-row break">  <div class="sched-time">12:00 - 13:30</div><div class="sched-dot"></div><div class="sched-info"><h4>Lunch</h4></div></div>
-      <div class="sched-row talk">  <div class="sched-time">13:30 - 14:15</div><div class="sched-dot"></div><div class="sched-info"><h4>Houssam Zenati</h4><p>Talk: Fast Best-in-Class Regret for Contextual Bandits</p></div></div>
+      <div class="sched-row talk">  <div class="sched-time">13:30 - 14:15</div><div class="sched-dot"></div><div class="sched-info"><h4>Ian Waudby-Smith</h4><p>Talk: Multi-Armed Sequential Hypothesis Testing by Betting</p></div></div>
       <div class="sched-row posters highlight"><div class="sched-time">14:15 - 17:15</div><div class="sched-dot"></div><div class="sched-info"><h4>Poster Session</h4><p>Accepted posters</p></div></div>
     </div>
   </div>
@@ -682,11 +702,10 @@
       <div class="cfp-sidebar">
         <div class="cfp-card">
           <h3>Important Dates</h3>
-          <div class="date-row"><span class="label">Form opens</span><span class="val">TBA</span></div>
-          <div class="date-row"><span class="label">Abstract deadline</span><span class="val">TBA</span></div>
-          <div class="date-row"><span class="label">Acceptance notice</span><span class="val">TBA</span></div>
-          <div class="date-row"><span class="label">Workshop day 1</span><span class="val">June 18, 2026</span></div>
-          <div class="date-row"><span class="label">Workshop day 2</span><span class="val">June 19, 2026</span></div>
+          <div class="date-row"><span class="label">Form opens</span><span class="val">April 20, 2026</span></div>
+          <div class="date-row"><span class="label">Abstract deadline</span><span class="val">May 21, 2026</span></div>
+          <div class="date-row"><span class="label">Acceptance notice</span><span class="val">May 22, 2026</span></div>
+          <div class="date-row"><span class="label">Workshop days</span><span class="val">June 18-19, 2026</span></div>
         </div>
       </div>
     </div>
