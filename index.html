@@ -116,6 +116,12 @@
     max-width: 500px; margin-bottom: 2rem;
   }
   .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .hero-workshop-logo {
+    display: block;
+    width: min(360px, 100%);
+    height: auto;
+    margin: 1.4rem auto 0;
+  }
   .host-kicker {
     font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--muted);
@@ -479,6 +485,17 @@
     margin-bottom: 0.95rem;
     background: var(--surface2);
   }
+  .sponsor-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.6rem 0 0.4rem;
+  }
+  .sponsor-logo {
+    display: block;
+    width: min(460px, 85%);
+    height: auto;
+  }
 
   footer {
     max-width: 1100px; margin: 0 auto;
@@ -525,7 +542,7 @@
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="#hero" aria-label="Gatsby">
-      <img src="GATSBY_Logo.jpg" alt="Gatsby logo">
+      <img src="gatsby_logo.png" alt="Gatsby logo">
     </a>
     <div class="nav-center">
       <ul class="nav-links">
@@ -565,6 +582,7 @@
         <div class="b-col"><div class="b-val" style="color:var(--accent);font-weight:700;">18-19</div><div class="b-bar-wrap"><div class="b-bar"></div></div><div class="b-name">dates</div></div>
       </div>
       <div class="bandit-caption"><strong>Hosted at Gatsby, UCL.</strong> Two days of talks, posters, and discussion on June 18-19, 2026.</div>
+      <img class="hero-workshop-logo" src="workshop_logo3_transparent.png" alt="Advances in Adaptive Experimentation workshop logo">
     </div>
   </div>
 </div>
@@ -766,6 +784,18 @@
           <p>University College London.</p>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="sponsors">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-number">07 — Sponsors</div>
+      <h2>Sponsors</h2>
+    </div>
+    <div class="sponsor-grid">
+      <img class="sponsor-logo" src="netflix.png" alt="Netflix logo">
     </div>
   </div>
 </div>
