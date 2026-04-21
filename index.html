@@ -37,26 +37,34 @@
   }
   .nav-inner {
     max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: 260px 1fr 220px; align-items: center;
+    display: grid; grid-template-columns: 300px 1fr 260px; align-items: center;
     padding: 0 2rem; height: 76px;
     gap: 1rem;
   }
-  .nav-logo {
+  .nav-brand {
     display: inline-flex;
     align-items: center;
+    gap: 0.9rem;
     text-decoration: none;
   }
-  .nav-logo img {
+  .nav-brand img {
     height: 58px;
     width: auto;
     object-fit: contain;
     display: block;
   }
-  .nav-logo.ucl {
+  .nav-brand.right {
     justify-self: end;
+    margin-right: 4rem;
   }
-  .nav-logo.ucl img {
+  .nav-brand .ucl-logo {
     height: 54px;
+  }
+  .nav-brand .ellis-logo {
+    height: 50px;
+  }
+  .nav-brand .csml-logo {
+    height: 52px;
   }
   .nav-links { display: flex; gap: 0; list-style: none; }
   .nav-center {
@@ -528,7 +536,7 @@
     .nav-inner { grid-template-columns: 1fr auto; height: auto; padding: 0.8rem 1.2rem; }
     .nav-center { justify-content: flex-end; }
     .nav-links { display: none; }
-    .nav-logo.ucl { display: none; }
+    .nav-brand.right { display: none; }
     h1 { font-size: 2rem; }
     .section-inner { padding: 3.5rem 1.2rem; }
     .brand-grid { grid-template-columns: 1fr; }
@@ -541,8 +549,9 @@
 
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#hero" aria-label="Gatsby">
+    <a class="nav-brand left" href="#hero" aria-label="Gatsby and UCL">
       <img src="gatsby_logo.png" alt="Gatsby logo">
+      <img class="ucl-logo" src="ucl_logo.jpg" alt="UCL logo">
     </a>
     <div class="nav-center">
       <ul class="nav-links">
@@ -555,8 +564,9 @@
       </ul>
       <a class="nav-cta" href="#posters">Workshop Application →</a>
     </div>
-    <a class="nav-logo ucl" href="#hero" aria-label="UCL">
-      <img src="ucl_logo.jpg" alt="UCL logo">
+    <a class="nav-brand right" href="#hero" aria-label="ELLIS and CSML">
+      <img class="ellis-logo" src="ellisforeurope_logo_transparent.png" alt="ELLIS logo">
+      <img class="csml-logo" src="csml_logo_vector.png" alt="CSML logo">
     </a>
   </div>
 </nav>
