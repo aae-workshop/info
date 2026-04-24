@@ -37,7 +37,7 @@
   }
   .nav-inner {
     max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: 300px 1fr 260px; align-items: center;
+    display: grid; grid-template-columns: 300px 1fr 300px; align-items: center;
     padding: 0 2rem; height: 76px;
     gap: 1rem;
   }
@@ -55,16 +55,16 @@
   }
   .nav-brand.right {
     justify-self: end;
-    margin-right: 4rem;
+    gap: 0.65rem;
   }
   .nav-brand .ucl-logo {
     height: 54px;
   }
   .nav-brand .ellis-logo {
-    height: 50px;
+    height: 24px;
   }
   .nav-brand .csml-logo {
-    height: 52px;
+    height: 36px;
   }
   .nav-links { display: flex; gap: 0; list-style: none; }
   .nav-center {
@@ -124,6 +124,17 @@
     max-width: 500px; margin-bottom: 2rem;
   }
   .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .hero-support {
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 520px;
+  }
+  .hero-support strong {
+    color: var(--ink2);
+    font-weight: 600;
+  }
   .hero-workshop-logo {
     display: block;
     width: min(360px, 100%);
@@ -564,8 +575,8 @@
       </ul>
       <a class="nav-cta" href="#posters">Workshop Application →</a>
     </div>
-    <a class="nav-brand right" href="#hero" aria-label="ELLIS and CSML">
-      <img class="ellis-logo" src="ellisforeurope_logo_transparent.png" alt="ELLIS logo">
+    <a class="nav-brand right" href="#hero" aria-label="ELLIS Unit London and CSML">
+      <img class="ellis-logo" src="ellis-logo_horizontal_black_2023-LONDON.png" alt="ELLIS Unit London logo">
       <img class="csml-logo" src="csml_logo_vector.png" alt="CSML logo">
     </a>
   </div>
@@ -581,6 +592,7 @@
         <a class="btn btn-accent" href="#posters">Workshop Application</a>
         <a class="btn btn-outline" href="#location">Venue Details</a>
       </div>
+      <p class="hero-support">Hosted by the Gatsby Computational Neuroscience Unit at UCL, with support from <strong>ELLIS Unit London</strong> and <strong>CSML</strong>.</p>
     </div>
     <div class="hero-aside" aria-hidden="true">
       <div class="aside-label">Workshop Snapshot</div>
